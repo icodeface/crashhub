@@ -1,16 +1,17 @@
 import datetime
 import json
 import os
-
 from flask import Flask, request
 from peewee import OperationalError
 
 from lib import issues, github, config
-from lib.database import db, create_tables, CrashKind, Crash, LogEntry
+from lib.database import db, create_tables, CrashKind, Crash, LogEntry, create_database
 
 app = Flask(__name__)
 
+create_database()
 db.connect()
+print("db connected")
 create_tables()
 db.close()
 
@@ -27,6 +28,11 @@ def setup():
 def stop(response):
     db.close()
     return response
+
+
+@app.route('/', methods=['GET'])
+def index():
+    return "hello world"
 
 
 @app.route('/crash', methods=['POST'])

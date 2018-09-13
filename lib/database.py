@@ -1,5 +1,6 @@
 import datetime
-
+import pymysql
+import time
 from playhouse.pool import PooledPostgresqlDatabase, PooledMySQLDatabase, PooledSqliteDatabase
 from playhouse.migrate import migrate, PostgresqlMigrator, SqliteMigrator, MySQLMigrator
 from peewee import Model, TextField, DateTimeField, DatabaseError
@@ -63,3 +64,18 @@ def create_tables():
         )
     except DatabaseError:
         pass
+
+
+def create_database():
+    if engine == PooledSqliteDatabase:
+        return
+    while True:
+        try:
+            conn = pymysql.connect(user=config.get('db_user'), password=config.get("db_password"),
+                    host=config.get("db_host"), port=int(config.get("db_port")))
+        except pymsql.OperationalError:
+            print('db not connected, wait for 5 seconds')
+            time.sleep(5)
+            continue
+        conn.cursor().execute('create database if not exists {} '.format(config.get('db_name')))
+        return
