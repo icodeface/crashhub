@@ -78,7 +78,7 @@ def create_database():
             elif engine == PooledPostgresqlDatabase:
                 conn = psycopg2.connect(user=config.get('db_user'), password=config.get("db_password"),
                     host=config.get("db_host"), port=int(config.get("db_port")))
-        except (pymsql.OperationalError, psycopg2.OperationalError):
+        except (pymysql.OperationalError, psycopg2.OperationalError):
             print('db not connected, wait for 5 seconds')
             time.sleep(5)
             continue
