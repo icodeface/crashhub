@@ -16,6 +16,9 @@ services:
       - crashhub
     volumes:
       - ./data/nginx.conf:/etc/nginx/nginx.conf
+      - ./data/qtum.site.crt:/opt/server.crt
+      - ./data/qtum.site.key:/opt/server.key
+      - ./data/log:/var/log/nginx
   crashhub:
     build: .
     links:
