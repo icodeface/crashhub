@@ -1,11 +1,11 @@
 {
-    "app_name": "Electrum",
-    "github_project": "spesmilo/electrum",
-    "github_token": "xyz",
-    "db_engine": "postgres",
+    "app_name": "Qtum Electrum",
+    "github_project": "qtumproject/qtum-electrum",
+    "github_token": "xxx",
+    "db_engine": "mysql",
     "db_name": "crashhub",
-    "db_host": "example.com",
+    "db_host": "db",
     "db_port": "3306",
     "db_user": "root",
-    "db_password": "password"
+    "db_password": "123456"
 }
